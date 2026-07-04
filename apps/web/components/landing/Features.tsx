@@ -1,3 +1,5 @@
+import Card from "@/components/ui/Card";
+
 const features = [
   "🎬 AI Movie Studio",
   "🖼 AI Image Generator",
@@ -10,25 +12,18 @@ const features = [
 export default function Features() {
   return (
     <section className="mx-auto grid max-w-7xl gap-8 px-8 py-20 md:grid-cols-3">
-
       {features.map((feature) => (
-
-        <div
-          key={feature}
-          className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-lg transition hover:scale-105"
-        >
+        <Card key={feature}>
           <h3 className="text-2xl font-bold text-white">
             {feature}
           </h3>
 
           <p className="mt-4 text-gray-400">
-            Professional AI-powered creative tools built for filmmakers and creators.
+            Professional AI-powered creative tools built for filmmakers,
+            content creators, educators, and storytellers.
           </p>
-
-        </div>
-
+        </Card>
       ))}
-
     </section>
   );
 }
