@@ -1,13 +1,14 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Hero from "@/components/landing/Hero";
-import TrustedBy from "@/components/landing/TrustedBy";
-import AIShowcase from "@/components/showcase/AIShowcase";
-import Features from "@/components/landing/Features";
-import Statistics from "@/components/landing/Statistics";
-import Testimonials from "@/components/landing/Testimonials";
-import Pricing from "@/components/landing/Pricing";
 import CinematicBackground from "@/components/background/CinematicBackground";
+
+import Hero from "@/features/landing/Hero";
+import TrustedBy from "@/features/landing/TrustedBy";
+import AIShowcase from "@/features/showcase/AIShowcase";
+import Features from "@/features/landing/Features";
+import Statistics from "@/features/landing/Statistics";
+import Testimonials from "@/features/landing/Testimonials";
+import Pricing from "@/features/landing/Pricing";
 
 export default function Home() {
   return (
