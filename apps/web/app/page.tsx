@@ -1,8 +1,12 @@
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import Hero from "@/components/landing/Hero";
 import TrustedBy from "@/components/landing/TrustedBy";
 import AIShowcase from "@/components/landing/AIShowcase";
-import Features from "@/components/landing/Features";
+import FloatingCards from "@/components/landing/FloatingCards";
+import Statistics from "@/components/landing/Statistics";
+import Testimonials from "@/components/landing/Testimonials";
+import Pricing from "@/components/landing/Pricing";
 import CinematicBackground from "@/components/background/CinematicBackground";
 
 export default function Home() {
@@ -13,7 +17,11 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <AIShowcase />
-      <Features />
+      <FloatingCards />
+      <Statistics />
+      <Testimonials />
+      <Pricing />
+      <Footer />
     </main>
   );
 }
