@@ -1,5 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/landing/Hero";
+import TrustedBy from "@/components/landing/TrustedBy";
+import AIShowcase from "@/components/landing/AIShowcase";
 import Features from "@/components/landing/Features";
 import CinematicBackground from "@/components/background/CinematicBackground";
 
@@ -9,6 +11,8 @@ export default function Home() {
       <CinematicBackground />
       <Navbar />
       <Hero />
+      <TrustedBy />
+      <AIShowcase />
       <Features />
     </main>
   );
