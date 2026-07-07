@@ -24,6 +24,8 @@ const MAIN_NAV = [
   { href: "/dashboard/settings", icon: Settings,         label: "Settings" },
 ];
 
+const STUDIO_LINK = { href: "/studio", icon: Clapperboard, label: "Open Studio" };
+
 const TOOLS = [
   { href: "/dashboard/studio/movie",     icon: Clapperboard, label: "Movie Generator" },
   { href: "/dashboard/studio/images",    icon: ImageIcon,    label: "AI Images" },
@@ -78,6 +80,15 @@ export default function Sidebar() {
               </Link>
             );
           })}
+
+          {/* Studio shortcut */}
+          <Link
+            href={STUDIO_LINK.href}
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all mt-1 bg-gradient-to-r from-violet-600/20 to-blue-600/10 border border-violet-500/20 text-violet-300 hover:border-violet-500/40 hover:text-white"
+          >
+            <STUDIO_LINK.icon size={20} />
+            {STUDIO_LINK.label}
+          </Link>
         </div>
 
         {/* Divider */}
