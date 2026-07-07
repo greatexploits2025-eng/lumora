@@ -24,10 +24,10 @@ const MAIN_NAV = [
   { href: "/dashboard/settings", icon: Settings,         label: "Settings" },
 ];
 
-const STUDIO_LINK = { href: "/studio", icon: Clapperboard, label: "Open Studio" };
+const STUDIO_LINK = { href: "/dashboard/studio", icon: Clapperboard, label: "Open Studio" };
 
 const TOOLS = [
-  { href: "/dashboard/studio/movie",     icon: Clapperboard, label: "Movie Generator" },
+  { href: "/dashboard/studio",           icon: Clapperboard, label: "Movie Studio" },
   { href: "/dashboard/studio/images",    icon: ImageIcon,    label: "AI Images" },
   { href: "/dashboard/studio/voice",     icon: Mic2,         label: "Voice Studio" },
   { href: "/dashboard/studio/character", icon: Drama,        label: "Character Creator" },

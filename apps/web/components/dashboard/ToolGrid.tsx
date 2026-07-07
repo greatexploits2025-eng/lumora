@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const TOOLS = [
   {
-    href:     "/dashboard/studio/movie",
+    href:     "/dashboard/studio",
     icon:     "🎬",
     label:    "Movie Generator",
     desc:     "Compose full AI film scenes from a prompt",
