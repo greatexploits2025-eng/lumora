@@ -1,26 +1,31 @@
-import { getServerUser } from "@/features/auth/services/auth.service";
-import DashboardStats from "@/features/dashboard/components/DashboardStats";
-import RecentProjects from "@/features/dashboard/components/RecentProjects";
-import QuickActions from "@/features/dashboard/components/QuickActions";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import WelcomeCard from "@/components/dashboard/WelcomeCard";
+import CreditsCard from "@/components/dashboard/CreditsCard";
+import ToolGrid from "@/components/dashboard/ToolGrid";
+import RecentProjects from "@/components/dashboard/RecentProjects";
 
 export default async function DashboardPage() {
-  const user = await getServerUser();
+  const { userId } = await auth();
+  if (!userId) redirect("/sign-in");
 
   return (
-    <div className="flex flex-col gap-10 max-w-7xl mx-auto">
+    <div className="mx-auto max-w-7xl flex flex-col gap-8">
       {/* Welcome */}
-      <div>
-        <h1 className="text-3xl font-black text-white">
-          👋 Welcome back, {user?.firstName ?? "Creator"}
-        </h1>
-        <p className="mt-1 text-gray-500">
-          Here's what's happening in your studio today.
-        </p>
+      <WelcomeCard />
+
+      {/* Credits + Recent Projects side by side on large screens */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-1">
+          <CreditsCard />
+        </div>
+        <div className="lg:col-span-2">
+          <RecentProjects />
+        </div>
       </div>
 
-      <DashboardStats />
-      <QuickActions />
-      <RecentProjects />
+      {/* AI Tools */}
+      <ToolGrid />
     </div>
   );
 }
