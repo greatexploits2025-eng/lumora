@@ -3,7 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 import { Hero, TrustedBy, Features, Statistics, Testimonials, Pricing } from "@/features/landing";
-import { AIShowcase } from "@/features/showcase";
+import { StudioPreview } from "@/features/studio";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <TrustedBy />
-      <AIShowcase />
+      <StudioPreview />
       <Features />
       <Statistics />
       <Testimonials />
