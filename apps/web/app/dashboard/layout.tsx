@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen bg-[#050816] text-white">
       <Sidebar />
       {/* Offset content by sidebar width */}
-      <div className="flex flex-1 flex-col pl-64">
+      <div className="flex flex-1 flex-col pl-72">
         <Topbar />
         <main className="flex-1 overflow-y-auto p-8">
           {children}
