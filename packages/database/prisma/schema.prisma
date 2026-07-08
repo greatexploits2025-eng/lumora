@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ── User ──────────────────────────────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  avatarUrl String?
+  plan      Plan     @default(FREE)
+  credits   Int      @default(50)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projects  Project[]
+
+  @@map("users")
+}
+
+enum Plan {
+  FREE
+  PRO
+  STUDIO
+}
+
+// ── Project ───────────────────────────────────────────────────────────────────
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  thumbnail   String?
+  status      ProjectStatus @default(DRAFT)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  ownerId     String
+  owner       User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  scripts     Script[]
+  images      GeneratedImage[]
+  videos      GeneratedVideo[]
+  voices      GeneratedVoice[]
+
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
+// ── Script ────────────────────────────────────────────────────────────────────
+
+model Script {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  genre     String?
+  tone      String?
+  prompt    String
+  createdAt DateTime @default(now())
+
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("scripts")
+}
+
+// ── Generated Image ───────────────────────────────────────────────────────────
+
+model GeneratedImage {
+  id          String   @id @default(cuid())
+  url         String
+  prompt      String
+  style       String?
+  aspectRatio String?
+  resolution  String?
+  provider    String   @default("flux")
+  createdAt   DateTime @default(now())
+
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("generated_images")
+}
+
+// ── Generated Video ───────────────────────────────────────────────────────────
+
+model GeneratedVideo {
+  id             String   @id @default(cuid())
+  url            String
+  thumbnailUrl   String?
+  prompt         String
+  durationSeconds Int?
+  provider       String   @default("kling")
+  createdAt      DateTime @default(now())
+
+  projectId      String
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("generated_videos")
+}
+
+// ── Generated Voice ───────────────────────────────────────────────────────────
+
+model GeneratedVoice {
+  id             String   @id @default(cuid())
+  audioUrl       String
+  text           String
+  voiceId        String?
+  language       String?
+  durationSeconds Float?
+  provider       String   @default("elevenlabs")
+  createdAt      DateTime @default(now())
+
+  projectId      String
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("generated_voices")
+}

@@ -10,11 +10,17 @@
   },
   "devDependencies": {
     "prettier": "^3.7.4",
+    "prisma": "^6.9.0",
     "turbo": "^2.10.2",
     "typescript": "5.9.2"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^7.5.13",
+    "@prisma/client": "^6.9.0",
+    "svix": "^1.96.1"
   }
 }
