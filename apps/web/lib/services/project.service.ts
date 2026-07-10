@@ -1,45 +1,46 @@
 import { projectRepository } from "../repositories/project.repository";
 
+export interface CreateProjectDTO {
+  title: string;
+  description?: string;
+  prompt?: string;
+  genre?: string;
+  style?: string;
+  language?: string;
+  duration?: number;
+  userId: string;
+}
+
+export interface UpdateProjectDTO {
+  title?: string;
+  description?: string;
+  prompt?: string;
+  genre?: string;
+  style?: string;
+  language?: string;
+  duration?: number;
+  thumbnail?: string;
+  outputVideo?: string;
+}
+
 export class ProjectService {
-  async createProject(data: {
-    title: string;
-    description?: string;
-    prompt?: string;
-    genre?: string;
-    style?: string;
-    language?: string;
-    duration?: number;
-    userId: string;
-  }) {
+  async create(data: CreateProjectDTO) {
     return projectRepository.create(data);
   }
 
-  async getProjects(userId: string) {
+  async findAll(userId: string) {
     return projectRepository.findByUser(userId);
   }
 
-  async getProject(id: string) {
+  async findById(id: string) {
     return projectRepository.findById(id);
   }
 
-  async updateProject(
-    id: string,
-    data: Partial<{
-      title: string;
-      description: string;
-      prompt: string;
-      genre: string;
-      style: string;
-      language: string;
-      duration: number;
-      thumbnail: string;
-      outputVideo: string;
-    }>
-  ) {
+  async update(id: string, data: UpdateProjectDTO) {
     return projectRepository.update(id, data);
   }
 
-  async deleteProject(id: string) {
+  async delete(id: string) {
     return projectRepository.delete(id);
   }
 }
