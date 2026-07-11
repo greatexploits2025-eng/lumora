@@ -16,7 +16,7 @@ export default async function ProjectPage({
 
   const user = await getCurrentUser();
 
-  const project = await projectService.findById(id);
+  const project = await projectService.findById(id, user.id);
 
   if (!project) {
     notFound();

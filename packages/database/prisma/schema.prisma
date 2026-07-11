@@ -9,16 +9,19 @@ datasource db {
 }
 
 model User {
-  id        String          @id @default(cuid())
-  clerkId   String          @unique
-  email     String          @unique
-  imageUrl  String?
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  name      String?
-  plan      Plan            @default(FREE)
-  jobs      GenerationJob[]
-  projects  Project[]
+  id         String            @id @default(cuid())
+  clerkId    String            @unique
+  email      String            @unique
+  imageUrl   String?
+  name       String?
+  plan       Plan              @default(FREE)
+
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  projects   Project[]
+  jobs       GenerationJob[]
+  auditLogs  AuditLog[]
 }
 
 model Project {
@@ -115,6 +118,21 @@ model Export {
   completedAt DateTime?
   projectId   String
   project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+
+  action     String
+  entityType String
+  entityId   String
+
+  metadata   Json?
+
+  createdAt  DateTime @default(now())
+
+  userId     String
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model playing_with_neon {

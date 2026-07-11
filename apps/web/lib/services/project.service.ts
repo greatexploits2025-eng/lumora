@@ -32,16 +32,20 @@ export class ProjectService {
     return projectRepository.findByUser(userId);
   }
 
-  async findById(id: string) {
-    return projectRepository.findById(id);
+  async findById(id: string, userId: string) {
+    return projectRepository.findById(id, userId);
   }
 
-  async update(id: string, data: UpdateProjectDTO) {
-    return projectRepository.update(id, data);
+  async update(
+    id: string,
+    userId: string,
+    data: UpdateProjectDTO
+  ) {
+    return projectRepository.update(id, userId, data);
   }
 
-  async delete(id: string) {
-    return projectRepository.delete(id);
+  async delete(id: string, userId: string) {
+    return projectRepository.delete(id, userId);
   }
 }
 

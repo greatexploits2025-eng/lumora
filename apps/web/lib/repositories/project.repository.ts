@@ -16,15 +16,20 @@ export class ProjectRepository {
     });
   }
 
-  async findById(id: string) {
-    return prisma.project.findUnique({
-      where: { id },
+  async findById(id: string, userId: string) {
+    return prisma.project.findFirst({
+      where: {
+        id,
+        userId,
+      },
     });
   }
 
   async findByUser(userId: string) {
     return prisma.project.findMany({
-      where: { userId },
+      where: {
+        userId,
+      },
       orderBy: {
         updatedAt: "desc",
       },
@@ -33,6 +38,7 @@ export class ProjectRepository {
 
   async update(
     id: string,
+    userId: string,
     data: Partial<{
       title: string;
       description: string;
@@ -45,15 +51,21 @@ export class ProjectRepository {
       outputVideo: string;
     }>
   ) {
-    return prisma.project.update({
-      where: { id },
+    return prisma.project.updateMany({
+      where: {
+        id,
+        userId,
+      },
       data,
     });
   }
 
-  async delete(id: string) {
-    return prisma.project.delete({
-      where: { id },
+  async delete(id: string, userId: string) {
+    return prisma.project.deleteMany({
+      where: {
+        id,
+        userId,
+      },
     });
   }
 }

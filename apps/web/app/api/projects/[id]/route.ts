@@ -8,11 +8,11 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await getCurrentUser();
+    const user = await getCurrentUser();
 
     const { id } = await params;
 
-    const project = await projectService.findById(id);
+    const project = await projectService.findById(id, user.id);
 
     if (!project) {
       return NextResponse.json(
@@ -44,13 +44,17 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await getCurrentUser();
+    const user = await getCurrentUser();
 
     const { id } = await params;
 
     const body = await req.json();
 
-    const project = await projectService.update(id, body);
+    const project = await projectService.update(
+  id,
+  user.id,
+  body
+);
 
     return NextResponse.json(project);
   } catch (error) {
@@ -71,11 +75,14 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await getCurrentUser();
+    const user = await getCurrentUser();
 
     const { id } = await params;
 
-    await projectService.delete(id);
+    await projectService.delete(
+      id,
+      user.id
+    );
 
     return NextResponse.json({
       success: true,
