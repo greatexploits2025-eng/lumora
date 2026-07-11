@@ -72,7 +72,7 @@ export default function PreviewPanel({ status = "idle", prompt, settings }: Prop
               <div>
                 <p className="text-white font-semibold">Generating your movie…</p>
                 {prompt && (
-                  <p className="mt-2 text-xs text-gray-500 max-w-xs truncate">"{prompt}"</p>
+                  <p className="mt-2 text-xs text-gray-500 max-w-xs truncate">&ldquo;{prompt}&rdquo;</p>
                 )}
               </div>
               {/* Step list */}
@@ -107,7 +107,7 @@ export default function PreviewPanel({ status = "idle", prompt, settings }: Prop
                     <span className="text-white text-2xl pl-1">▶</span>
                   </div>
                   {prompt && (
-                    <p className="text-xs text-white/50 max-w-xs text-center px-4">"{prompt}"</p>
+                    <p className="text-xs text-white/50 max-w-xs text-center px-4">&ldquo;{prompt}&rdquo;</p>
                   )}
                 </div>
               </div>

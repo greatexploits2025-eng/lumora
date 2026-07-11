@@ -34,7 +34,7 @@ export default async function WelcomeCard() {
           </h1>
 
           <p className="mt-2 text-gray-400">
-            Let's create something incredible today.
+            Let&apos;s create something incredible today.
           </p>
         </div>
 

@@ -51,7 +51,7 @@ export default function OutputPreview({ status, gradient, label = "Output", prom
 
             {prompt && (
               <div className="absolute top-3 left-3 rounded-lg border border-white/10 bg-black/50 backdrop-blur px-3 py-1.5 text-xs text-white/70 max-w-[80%] truncate">
-                "{prompt}"
+                &ldquo;{prompt}&ldquo;
               </div>
             )}
 
