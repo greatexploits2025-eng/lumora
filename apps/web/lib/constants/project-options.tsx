@@ -1,0 +1,63 @@
+export const GENRES = [
+  "Adventure",
+  "Action",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Fantasy",
+  "Historical",
+  "Horror",
+  "Mystery",
+  "Romance",
+  "Sci-Fi",
+  "Thriller",
+  "War",
+  "Western",
+];
+
+export const STYLES = [
+  "Cinematic",
+  "Hollywood",
+  "Pixar",
+  "Anime",
+  "Disney",
+  "Realistic",
+  "3D Animation",
+  "Comic Book",
+  "Noir",
+  "Cyberpunk",
+  "Photorealistic",
+  "Studio Ghibli",
+];
+
+export const LANGUAGES = [
+  "English",
+  "French",
+  "Spanish",
+  "German",
+  "Italian",
+  "Portuguese",
+  "Arabic",
+  "Chinese",
+  "Japanese",
+  "Korean",
+  "Hindi",
+  "Yoruba",
+  "Igbo",
+  "Hausa",
+];
+
+export const DURATIONS = [
+  "30 sec",
+  "1 min",
+  "3 mins",
+  "5 mins",
+  "10 mins",
+  "20 mins",
+  "30 mins",
+  "45 mins",
+  "60 mins",
+  "90 mins",
+];

@@ -1,23 +1,126 @@
-// ===================================================
-// Generator
-// ===================================================
-
 generator client {
   provider = "prisma-client-js"
 }
-
-// ===================================================
-// Datasource
-// ===================================================
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// ===================================================
-// ENUMS
-// ===================================================
+model User {
+  id        String          @id @default(cuid())
+  clerkId   String          @unique
+  email     String          @unique
+  imageUrl  String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  name      String?
+  plan      Plan            @default(FREE)
+  jobs      GenerationJob[]
+  projects  Project[]
+}
+
+model Project {
+  id          String          @id @default(cuid())
+  title       String          @default("Untitled Project")
+  description String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  genre       String?
+  language    String          @default("English")
+  status      ProjectStatus   @default(DRAFT)
+  userId      String
+  duration    Int?
+  outputVideo String?
+  prompt      String?
+  style       String?
+  thumbnail   String?
+  assets      Asset[]
+  characters  Character[]
+  exports     Export[]
+  jobs        GenerationJob[]
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scenes      Scene[]
+  scripts     Script[]
+}
+
+model Script {
+  id        String   @id @default(cuid())
+  title     String?
+  content   String
+  version   Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Scene {
+  id          String  @id @default(cuid())
+  title       String?
+  description String?
+  order       Int
+  prompt      String?
+  projectId   String
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Character {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  appearance  String?
+  voice       String?
+  imageUrl    String?
+  projectId   String
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Asset {
+  id        String    @id @default(cuid())
+  type      AssetType
+  name      String?
+  url       String
+  provider  String?
+  metadata  Json?
+  createdAt DateTime  @default(now())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model GenerationJob {
+  id          String    @id @default(cuid())
+  type        String
+  provider    String
+  model       String?
+  prompt      String?
+  status      JobStatus @default(PENDING)
+  startedAt   DateTime?
+  completedAt DateTime?
+  error       String?
+  projectId   String
+  userId      String
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Export {
+  id          String       @id @default(cuid())
+  format      String
+  resolution  String?
+  url         String?
+  status      ExportStatus @default(PENDING)
+  createdAt   DateTime     @default(now())
+  completedAt DateTime?
+  projectId   String
+  project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model playing_with_neon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
+}
 
 enum Plan {
   FREE
@@ -30,8 +133,8 @@ enum ProjectStatus {
   WRITING
   GENERATING
   EDITING
-  RENDERING
   COMPLETED
+  RENDERING
   ARCHIVED
 }
 
@@ -56,217 +159,4 @@ enum ExportStatus {
   PROCESSING
   COMPLETED
   FAILED
-}
-
-// ===================================================
-// USER
-// ===================================================
-
-model User {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique
-
-  email     String   @unique
-  name      String?
-  imageUrl  String?
-
-  plan       Plan @default(FREE)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  projects Project[]
-  jobs     GenerationJob[]
-}
-
-// ===================================================
-// PROJECT
-// ===================================================
-
-model Project {
-  id          String @id @default(cuid())
-
-  title       String @default("Untitled Project")
-
-  description String?
-
-  prompt      String?
-
-  genre       String?
-
-  style       String?
-
-  language    String @default("English")
-
-  duration    Int?
-
-  thumbnail   String?
-
-  outputVideo String?
-
-  status ProjectStatus @default(DRAFT)
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  userId String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  scripts Script[]
-
-  scenes Scene[]
-
-  characters Character[]
-
-  assets Asset[]
-
-  jobs GenerationJob[]
-
-  exports Export[]
-}
-
-// ===================================================
-// SCRIPT
-// ===================================================
-
-model Script {
-  id String @id @default(cuid())
-
-  title String?
-
-  content String @db.Text
-
-  version Int @default(1)
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  projectId String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-}
-
-// ===================================================
-// SCENE
-// ===================================================
-
-model Scene {
-  id String @id @default(cuid())
-
-  title String?
-
-  description String? @db.Text
-
-  order Int
-
-  prompt String? @db.Text
-
-  projectId String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-}
-
-// ===================================================
-// CHARACTER
-// ===================================================
-
-model Character {
-  id String @id @default(cuid())
-
-  name String
-
-  description String? @db.Text
-
-  appearance String? @db.Text
-
-  voice String?
-
-  imageUrl String?
-
-  projectId String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-}
-
-// ===================================================
-// ASSET
-// ===================================================
-
-model Asset {
-  id String @id @default(cuid())
-
-  type AssetType
-
-  name String?
-
-  url String
-
-  provider String?
-
-  metadata Json?
-
-  createdAt DateTime @default(now())
-
-  projectId String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-}
-
-// ===================================================
-// AI GENERATION JOBS
-// ===================================================
-
-model GenerationJob {
-  id String @id @default(cuid())
-
-  type String
-
-  provider String
-
-  model String?
-
-  prompt String? @db.Text
-
-  status JobStatus @default(PENDING)
-
-  startedAt DateTime?
-
-  completedAt DateTime?
-
-  error String? @db.Text
-
-  projectId String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  userId String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-// ===================================================
-// EXPORTS
-// ===================================================
-
-model Export {
-  id String @id @default(cuid())
-
-  format String
-
-  resolution String?
-
-  url String?
-
-  status ExportStatus @default(PENDING)
-
-  createdAt DateTime @default(now())
-
-  completedAt DateTime?
-
-  projectId String
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

@@ -1,33 +1,48 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+
+import { auth } from "@clerk/nextjs/server";
+
 import { getCurrentUser } from "@/lib/auth";
+
 import { projectService } from "@/lib/services/project.service";
 
-// GET /api/projects
 export async function GET() {
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const user = await getCurrentUser();
 
     const projects = await projectService.findAll(user.id);
 
     return NextResponse.json(projects);
   } catch (error) {
+    console.error(error);
+
     return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unknown error",
-      },
-      {
-        status: 401,
-      }
+      { error: "Unable to fetch projects." },
+      { status: 500 }
     );
   }
 }
 
-// POST /api/projects
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     const user = await getCurrentUser();
 
     const body = await req.json();
@@ -38,8 +53,11 @@ export async function POST(req: Request) {
       prompt: body.prompt,
       genre: body.genre,
       style: body.style,
-      language: body.language ?? "English",
-      duration: body.duration,
+      language: body.language,
+      duration:
+        typeof body.duration === "string"
+          ? parseInt(body.duration) || 1
+          : body.duration,
       userId: user.id,
     });
 
@@ -47,16 +65,11 @@ export async function POST(req: Request) {
       status: 201,
     });
   } catch (error) {
+    console.error(error);
+
     return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unknown error",
-      },
-      {
-        status: 401,
-      }
+      { error: "Unable to create project." },
+      { status: 500 }
     );
   }
 }

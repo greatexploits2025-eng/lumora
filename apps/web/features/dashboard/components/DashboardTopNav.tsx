@@ -28,7 +28,7 @@ export default function DashboardTopNav() {
         )}
 
         {/* Clerk user button — handles avatar, profile, sign out */}
-        <UserButton afterSignOutUrl="/" />
+        <UserButton />
       </div>
     </header>
   );
