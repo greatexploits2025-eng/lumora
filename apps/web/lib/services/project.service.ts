@@ -1,5 +1,5 @@
 import { projectRepository } from "../repositories/project.repository";
-
+import { auditService } from "./audit.service";
 export interface CreateProjectDTO {
   title: string;
   description?: string;
@@ -25,8 +25,20 @@ export interface UpdateProjectDTO {
 
 export class ProjectService {
   async create(data: CreateProjectDTO) {
-    return projectRepository.create(data);
-  }
+  const project = await projectRepository.create(data);
+
+  await auditService.log({
+    action: "PROJECT_CREATED",
+    entityType: "Project",
+    entityId: project.id,
+    userId: data.userId,
+    metadata: {
+      title: project.title,
+    },
+  });
+
+  return project;
+}
 
   async findAll(userId: string) {
     return projectRepository.findByUser(userId);
@@ -37,16 +49,37 @@ export class ProjectService {
   }
 
   async update(
-    id: string,
-    userId: string,
-    data: UpdateProjectDTO
-  ) {
-    return projectRepository.update(id, userId, data);
-  }
+  id: string,
+  userId: string,
+  data: UpdateProjectDTO
+) {
+  const project = await projectRepository.update(
+    id,
+    userId,
+    data
+  );
+
+  await auditService.log({
+    action: "PROJECT_UPDATED",
+    entityType: "Project",
+    entityId: project.id,
+    userId,
+    metadata: { ...data },
+  });
+
+  return project;
+}
 
   async delete(id: string, userId: string) {
-    return projectRepository.delete(id, userId);
-  }
+  await auditService.log({
+    action: "PROJECT_DELETED",
+    entityType: "Project",
+    entityId: id,
+    userId,
+  });
+
+  return projectRepository.delete(id, userId);
+}
 }
 
 export const projectService = new ProjectService();

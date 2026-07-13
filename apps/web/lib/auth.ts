@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { prisma } from "./prisma";
+import { prisma } from "@repo/database";
 
 export async function getCurrentUser() {
   const { userId } = await auth();

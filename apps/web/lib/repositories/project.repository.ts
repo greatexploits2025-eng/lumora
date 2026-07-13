@@ -1,4 +1,4 @@
-import { prisma } from "../prisma";
+import { prisma } from "@repo/database";
 
 export class ProjectRepository {
   async create(data: {
@@ -37,34 +37,32 @@ export class ProjectRepository {
   }
 
   async update(
-    id: string,
-    userId: string,
-    data: Partial<{
-      title: string;
-      description: string;
-      prompt: string;
-      genre: string;
-      style: string;
-      language: string;
-      duration: number;
-      thumbnail: string;
-      outputVideo: string;
-    }>
-  ) {
-    return prisma.project.updateMany({
-      where: {
-        id,
-        userId,
-      },
-      data,
-    });
-  }
+  id: string,
+  userId: string,
+  data: Partial<{
+    title: string;
+    description: string;
+    prompt: string;
+    genre: string;
+    style: string;
+    language: string;
+    duration: number;
+    thumbnail: string;
+    outputVideo: string;
+  }>
+) {
+  return prisma.project.update({
+    where: {
+      id,
+    },
+    data,
+  });
+}
 
   async delete(id: string, userId: string) {
-    return prisma.project.deleteMany({
+    return prisma.project.delete({
       where: {
         id,
-        userId,
       },
     });
   }
