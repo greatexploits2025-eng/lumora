@@ -22,7 +22,9 @@ export default function CreateProjectModal({
 
   if (!open) return null;
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
     setLoading(true);
@@ -44,17 +46,21 @@ export default function CreateProjectModal({
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const error = await response.json();
-        alert(error.error ?? "Unable to create project.");
+        alert(data.error ?? "Unable to create project.");
         return;
       }
 
+      // close modal
       onClose();
 
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
+      // refresh the dashboard
+      window.location.href = "/dashboard";
+
+    } catch (err) {
+      console.error(err);
       alert("Something went wrong.");
     } finally {
       setLoading(false);

@@ -6,6 +6,7 @@ import PreviewPanel from "@/components/studio/PreviewPanel";
 import QuickOptions from "@/components/studio/QuickOptions";
 import AssetSidebar from "@/components/studio/AssetSidebar";
 import Timeline from "@/components/studio/Timeline";
+import StudioCanvas from "@/components/studio/StudioCanvas";
 
 export default async function StudioPage() {
   const { userId } = await auth();
@@ -31,6 +32,9 @@ export default async function StudioPage() {
         {/* Asset sidebar */}
         <AssetSidebar />
       </div>
+      <div>
+   <StudioCanvas />
+</div>
     </main>
   );
 }
