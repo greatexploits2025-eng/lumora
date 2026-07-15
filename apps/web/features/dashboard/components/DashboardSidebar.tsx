@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/features/auth";
 
 const NAV = [
-  { href: "/dashboard",           icon: "⬡", label: "Dashboard" },
-  { href: "/dashboard/projects",  icon: "🎬", label: "My Projects" },
-  { href: "/dashboard/images",    icon: "🎨", label: "AI Images" },
-  { href: "/dashboard/videos",    icon: "🎥", label: "Videos" },
-  { href: "/dashboard/scripts",   icon: "📝", label: "Scripts" },
-  { href: "/dashboard/voices",    icon: "🎙️", label: "Voice Studio" },
-  { href: "/dashboard/characters",icon: "🧑", label: "Characters" },
-  { href: "/dashboard/studio",    icon: "🎞️", label: "Movie Studio" },
+  { href: "/studio",           icon: "⬡", label: "Dashboard" },
+  { href: "/studio/projects",  icon: "🎬", label: "My Projects" },
+  { href: "/studio/images",    icon: "🎨", label: "AI Images" },
+  { href: "/studio/videos",    icon: "🎥", label: "Videos" },
+  { href: "/studio/scripts",   icon: "📝", label: "Scripts" },
+  { href: "/studio/voices",    icon: "🎙️", label: "Voice Studio" },
+  { href: "/studio/characters",icon: "🧑", label: "Characters" },
+  { href: "/studio/studio",    icon: "🎞️", label: "Movie Studio" },
 ];
 
 const BOTTOM_NAV = [

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const TOOLS = [
   {
-    href:     "/dashboard/studio",
+    href:     "/studio",
     icon:     "🎬",
     label:    "Movie Generator",
     desc:     "Compose full AI film scenes from a prompt",
@@ -13,7 +13,7 @@ const TOOLS = [
     badgeStyle: "border-violet-500/40 bg-violet-500/10 text-violet-300",
   },
   {
-    href:     "/dashboard/studio/images",
+    href:     "/studio/images",
     icon:     "🖼",
     label:    "AI Images",
     desc:     "Generate cinematic images from text",
@@ -24,7 +24,7 @@ const TOOLS = [
     badgeStyle: "",
   },
   {
-    href:     "/dashboard/studio/voice",
+    href:     "/studio/voice",
     icon:     "🎤",
     label:    "Voice Studio",
     desc:     "Clone voices and generate AI narration",
@@ -35,7 +35,7 @@ const TOOLS = [
     badgeStyle: "",
   },
   {
-    href:     "/dashboard/studio/character",
+    href:     "/studio/character",
     icon:     "🎭",
     label:    "Character Creator",
     desc:     "Build lip-synced talking AI characters",
@@ -46,7 +46,7 @@ const TOOLS = [
     badgeStyle: "",
   },
   {
-    href:     "/dashboard/studio/script",
+    href:     "/studio/script",
     icon:     "📜",
     label:    "Script Writer",
     desc:     "Write full screenplays in seconds",
@@ -57,7 +57,7 @@ const TOOLS = [
     badgeStyle: "",
   },
   {
-    href:     "/dashboard/studio/video",
+    href:     "/studio/video",
     icon:     "🎞",
     label:    "Image → Video",
     desc:     "Animate any image into a cinematic clip",

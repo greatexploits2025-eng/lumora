@@ -24,15 +24,15 @@ const MAIN_NAV = [
   { href: "/dashboard/settings", icon: Settings,         label: "Settings" },
 ];
 
-const STUDIO_LINK = { href: "/dashboard/studio", icon: Clapperboard, label: "Open Studio" };
+const STUDIO_LINK = { href: "/studio", icon: Clapperboard, label: "Open Studio" };
 
 const TOOLS = [
-  { href: "/dashboard/studio",           icon: Clapperboard, label: "Movie Studio" },
-  { href: "/dashboard/studio/images",    icon: ImageIcon,    label: "AI Images" },
-  { href: "/dashboard/studio/voice",     icon: Mic2,         label: "Voice Studio" },
-  { href: "/dashboard/studio/character", icon: Drama,        label: "Character Creator" },
-  { href: "/dashboard/studio/script",    icon: FileText,     label: "Script Writer" },
-  { href: "/dashboard/studio/video",     icon: Film,         label: "Image → Video" },
+  { href: "/studio",           icon: Clapperboard, label: "Movie Studio" },
+  { href: "/studio/images",    icon: ImageIcon,    label: "AI Images" },
+  { href: "/studio/voice",     icon: Mic2,         label: "Voice Studio" },
+  { href: "/studio/character", icon: Drama,        label: "Character Creator" },
+  { href: "/studio/script",    icon: FileText,     label: "Script Writer" },
+  { href: "/studio/video",     icon: Film,         label: "Image → Video" },
 ];
 
 export default function Sidebar() {
