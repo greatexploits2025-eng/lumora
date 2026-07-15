@@ -1,40 +1,38 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
 import StudioHeader from "@/components/studio/StudioHeader";
 import PromptBox from "@/components/studio/PromptBox";
 import PreviewPanel from "@/components/studio/PreviewPanel";
-import QuickOptions from "@/components/studio/QuickOptions";
-import AssetSidebar from "@/components/studio/AssetSidebar";
 import Timeline from "@/components/studio/Timeline";
-import StudioCanvas from "@/components/studio/StudioCanvas";
+import GenerationSettings from "@/components/studio/GenerationSettings";
 
 export default async function StudioPage() {
   const { userId } = await auth();
-  if (!userId) redirect("/sign-in");
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#050816] text-white">
-      <StudioHeader />
+    <>
+      <StudioHeader title="AI Movie Studio" />
 
-      <div className="flex flex-1 overflow-hidden">
-        {/* Main workspace */}
-        <div className="flex flex-1 flex-col gap-8 overflow-y-auto p-8">
-          <QuickOptions />
+      <div className="grid grid-cols-[1fr_380px] gap-6 p-8">
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            <PromptBox />
-            <PreviewPanel />
-          </div>
+        <div className="space-y-6">
+
+          <PromptBox />
+
+          <PreviewPanel />
 
           <Timeline />
+
         </div>
 
-        {/* Asset sidebar */}
-        <AssetSidebar />
+        <GenerationSettings />
+
       </div>
-      <div>
-   <StudioCanvas />
-</div>
-    </main>
+    </>
   );
 }

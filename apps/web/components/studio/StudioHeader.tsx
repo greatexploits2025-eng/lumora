@@ -1,18 +1,37 @@
-export default function StudioHeader() {
+type Props = {
+  title: string;
+};
+
+export default function StudioHeader({
+  title,
+}: Props) {
   return (
-    <header className="flex items-center justify-between border-b border-white/10 px-8 py-6">
+    <header className="flex items-center justify-between border-b border-white/10 bg-[#0B1024] px-8 py-5">
+
       <div>
-        <h1 className="text-3xl font-black text-white">
-          AI Movie Studio
+
+        <h1 className="text-2xl font-black">
+          {title}
         </h1>
+
         <p className="text-gray-400">
-          Build complete cinematic experiences using AI.
+          AI Movie Production Studio
         </p>
+
       </div>
 
-      <button className="rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 px-6 py-3 font-semibold text-white hover:opacity-90 transition">
-        New Project
-      </button>
+      <div className="flex gap-3">
+
+        <button className="rounded-xl border border-white/10 px-5 py-2 hover:bg-white/5">
+          Save
+        </button>
+
+        <button className="rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 px-6 py-2 font-semibold">
+          Render
+        </button>
+
+      </div>
+
     </header>
   );
 }
