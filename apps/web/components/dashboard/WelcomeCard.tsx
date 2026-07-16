@@ -38,22 +38,6 @@ export default async function WelcomeCard() {
           </p>
         </div>
 
-        <div className="flex gap-3">
-
-          <button
-            className="rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 shadow-[0_0_20px_rgba(139,92,246,0.35)]"
-          >
-            + New Project
-          </button>
-
-          <button
-            className="rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-          >
-            View All
-          </button>
-
-        </div>
-
       </div>
 
     </div>

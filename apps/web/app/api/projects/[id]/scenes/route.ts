@@ -7,9 +7,9 @@ import { sceneService } from "@/lib/services/scene.service";
 
 type Props = {
   params: Promise<{
-    projectId: string;
+    id: string;
   }>;
-};
+}; 
 
 export async function GET(
   req: NextRequest,
@@ -27,10 +27,10 @@ export async function GET(
 
     const user = await getCurrentUser();
 
-    const { projectId } = await params;
+    const { id } = await params;
 
     const project = await projectService.findById(
-      projectId,
+      id,
       user.id
     );
 
@@ -41,7 +41,7 @@ export async function GET(
       );
     }
 
-    const scenes = await sceneService.findAll(projectId);
+    const scenes = await sceneService.findAll(id);
 
     return NextResponse.json(scenes);
   } catch (error) {
@@ -70,10 +70,10 @@ export async function POST(
 
     const user = await getCurrentUser();
 
-    const { projectId } = await params;
+    const { id } = await params;
 
     const project = await projectService.findById(
-      projectId,
+      id,
       user.id
     );
 
@@ -90,7 +90,7 @@ export async function POST(
       title: body.title,
       description: body.description,
       prompt: body.prompt,
-      projectId,
+      projectId: id,
       userId: user.id,
     });
 
