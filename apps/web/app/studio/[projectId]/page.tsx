@@ -18,12 +18,17 @@ type Props = {
   params: Promise<{
     projectId: string;
   }>;
+  searchParams: Promise<{
+    scene?: string;
+  }>;
 };
 
 export default async function StudioPage({
   params,
+  searchParams,
 }: Props) {
   const { projectId } = await params;
+  const { scene } = await searchParams;
 
   const user = await getCurrentUser();
 
@@ -38,17 +43,25 @@ export default async function StudioPage({
 
   const scenes = await sceneService.findAll(projectId);
 
+  const selectedScene =
+    scenes.find((s) => s.id === scene) ??
+    scenes[0] ??
+    null;
+
   return (
     <div className="flex h-screen flex-col bg-[#050816] text-white">
 
-      <StudioHeader title={project.title ?? "Untitled Project"} />
-      
+      <StudioHeader
+        title={project.title ?? "Untitled Project"}
+      />
+
       <StudioInitializer scenes={scenes} />
 
       <div className="flex flex-1 overflow-hidden">
 
         <SceneSidebar
           projectId={projectId}
+          selectedSceneId={selectedScene?.id}
         />
 
         <main className="flex flex-1 flex-col">
@@ -58,14 +71,14 @@ export default async function StudioPage({
             <div className="flex flex-1 flex-col gap-6 p-6">
 
               <SceneEditor
-                title={scenes[0]?.title ?? ""}
-                description={scenes[0]?.description ?? ""}
-                prompt={scenes[0]?.prompt ?? ""}
-             />
+                title={selectedScene?.title ?? ""}
+                description={selectedScene?.description ?? ""}
+                prompt={selectedScene?.prompt ?? ""}
+              />
 
-             <PreviewPanel />
+              <PreviewPanel />
 
-             <Timeline />
+              <Timeline />
 
             </div>
 

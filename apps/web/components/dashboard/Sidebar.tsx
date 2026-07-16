@@ -41,7 +41,7 @@ const MAIN_NAV = [
 
 const TOOLS = [
   {
-    href: "/dashboard/projects",
+    href: "/studio",
     icon: Clapperboard,
     label: "Movie Studio",
   },

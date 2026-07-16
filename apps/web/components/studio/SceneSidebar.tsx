@@ -7,22 +7,20 @@ import { Plus, Clapperboard } from "lucide-react";
 import CreateSceneModal from "./CreateSceneModal";
 import { useStudioStore } from "@/store/studio.store";
 
-type Scene = {
-  id: string;
-  title: string | null;
-};
-
 type Props = {
   projectId: string;
+  selectedSceneId?: string;
 };
 
 export default function SceneSidebar({
   projectId,
+  selectedSceneId,
 }: Props) {
   const [open, setOpen] = useState(false);
+
   const scenes = useStudioStore(
-  (state) => state.scenes
-);
+    (state) => state.scenes
+  );
 
   return (
     <>
@@ -45,7 +43,11 @@ export default function SceneSidebar({
               <Link
                 key={scene.id}
                 href={`/studio/${projectId}?scene=${scene.id}`}
-                className="flex items-center gap-3 border-b border-white/5 px-5 py-4 transition hover:bg-white/5"
+                className={`flex items-center gap-3 border-b border-white/5 px-5 py-4 transition ${
+                  selectedSceneId === scene.id
+                    ? "border-l-4 border-violet-500 bg-violet-600/20"
+                    : "hover:bg-white/5"
+                }`}
               >
                 <Clapperboard
                   size={18}

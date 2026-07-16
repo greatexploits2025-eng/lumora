@@ -12,7 +12,7 @@ const NAV = [
   { href: "/studio/scripts",   icon: "📝", label: "Scripts" },
   { href: "/studio/voices",    icon: "🎙️", label: "Voice Studio" },
   { href: "/studio/characters",icon: "🧑", label: "Characters" },
-  { href: "/studio/studio",    icon: "🎞️", label: "Movie Studio" },
+  { href: "/studio",    icon: "🎞️", label: "Movie Studio" },
 ];
 
 const BOTTOM_NAV = [
